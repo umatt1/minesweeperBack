@@ -1,17 +1,19 @@
 CREATE TABLE user (
-    id INT NOT NULL PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(15) NOT NULL,
     password VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE puzzle (
-    id INT NOT NULL PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT,
     size INT NOT NULL,
     mines INT NOT NULL,
     -- the layout will be a binary string up to a 25 x 25 puzzle
     -- 1 = mine
     -- 0 = open space
-    layout VARBINARY(625)
+    layout NOT NULL VARBINARY(625),
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE solve (
