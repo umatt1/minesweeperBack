@@ -1,0 +1,5 @@
+CREATE TABLE user (
+    id INT NOT NULL PRIMARY KEY,
+    username VARCHAR(15) NOT NULL,
+    password VARCHAR(20) NOT NULL,
+)
