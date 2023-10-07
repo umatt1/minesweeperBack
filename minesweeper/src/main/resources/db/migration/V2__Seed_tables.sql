@@ -6,8 +6,8 @@ INSERT INTO user (username, password) VALUES
 
 -- Insert data into the 'puzzle' table
 INSERT INTO puzzle (size, mines, layout) VALUES
-(8, 10, X'FFFFFFFFFFFFFFFFFFFFFFFFF'), -- A layout with no mines
-(10, 20, X'FFFFFFFFFFFFFFFFFFF0000F'), -- A layout with some mines
+(8, 0, X'0'), -- A layout with no mines
+(10, 10, X'180040800000000030218200'), -- A layout with some mines
 
 -- Insert data into the 'solve' table
 INSERT INTO solve (uid, pid, time) VALUES
