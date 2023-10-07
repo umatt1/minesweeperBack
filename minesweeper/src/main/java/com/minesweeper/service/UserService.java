@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import com.minesweeper.repo.UserRepository;
+import com.minesweeper.model.User;
 
 @Service
 public class UserService {
