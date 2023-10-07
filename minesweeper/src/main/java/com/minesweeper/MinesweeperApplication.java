@@ -1,4 +1,4 @@
-package com.minesweeper.minesweeper;
+package com.minesweeper;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
