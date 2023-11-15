@@ -8,7 +8,7 @@ public class Solve {
     @Id
     @ManyToOne
     @JoinColumn(name = "uid", referencedColumnName = "id")
-    private User user;
+    private Player player;
 
     @Id
     @ManyToOne
