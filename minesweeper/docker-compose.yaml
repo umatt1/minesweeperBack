@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: minesweeperdb
+      POSTGRES_USER: minesweeperuser
+      POSTGRES_PASSWORD: minesweeperpassword
+    ports:
+      - "5432:5432"
+
+  minesweeper-app:
+    image: minesweeper-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
