@@ -3,7 +3,7 @@ docker run -d \
   -e POSTGRES_DB=minesweeperdb \
   -e POSTGRES_USER=minesweeperuser \
   -e POSTGRES_PASSWORD=minesweeperpassword \
-  -p 4646:4646 \
+  -p 5432:5432 \
   -v "$(pwd)/src/main/resources/db/migration:/docker-entrypoint-initdb.d" \
   postgres
 
