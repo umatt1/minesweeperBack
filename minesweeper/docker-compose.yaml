@@ -8,7 +8,9 @@ services:
       POSTGRES_USER: minesweeperuser
       POSTGRES_PASSWORD: minesweeperpassword
     ports:
-      - "5432:5432"
+      - "4646:4646"
+    volumes:
+      - ./src/main/resources/db/migration:/docker-entrypoint-initdb.d
 
   minesweeper-app:
     image: minesweeper-app
