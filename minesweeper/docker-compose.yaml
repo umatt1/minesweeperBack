@@ -8,10 +8,13 @@ services:
       POSTGRES_USER: minesweeperuser
       POSTGRES_PASSWORD: minesweeperpassword
     ports:
-      - "5432:5432"  # Update the port mapping to use the default PostgreSQL port
+      - "5432:5432"
     volumes:
       - ./src/main/resources/db/migration:/docker-entrypoint-initdb.d
 
+
+  # why is minesweeper-app included in here?
+  # does the docker-compose contain both postgres AND rest api?
   minesweeper-app:
     image: minesweeper-app
     ports:
