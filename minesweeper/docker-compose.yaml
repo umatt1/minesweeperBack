@@ -10,8 +10,6 @@ services:
       POSTGRES_PASSWORD: minesweeperpassword
     ports:
       - "5432:5432"
-    volumes:
-      - ./src/main/resources/db/migration:/docker-entrypoint-initdb.d
 
 
   # why is minesweeper-app included in here?
