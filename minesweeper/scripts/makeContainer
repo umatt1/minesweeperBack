@@ -1,9 +1,1 @@
-docker run -d \
-  --name minesweeper-postgres \
-  -e POSTGRES_DB=minesweeperdb \
-  -e POSTGRES_USER=minesweeperuser \
-  -e POSTGRES_PASSWORD=minesweeperpassword \
-  -p 5432:5432 \
-  -v "$(pwd)/src/main/resources/db/migration:/docker-entrypoint-initdb.d" \
-  postgres
-
+docker-compose up -d

@@ -4,6 +4,7 @@ services:
   postgres:
     image: postgres
     restart: always
+    container_name: minesweeper-postgres
     environment:
       POSTGRES_DB: minesweeperdb
       POSTGRES_USER: minesweeperuser
@@ -12,11 +13,12 @@ services:
       - "5432:5432"
 
 
+
   # why is minesweeper-app included in here?
   # does the docker-compose contain both postgres AND rest api?
-  minesweeper-app:
-    image: minesweeper-app
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres
+  #minesweeper-app:
+  #  image: minesweeper-app
+  #  ports:
+  #    - "8080:8080"
+  #  depends_on:
+  #    - postgres
