@@ -1,6 +1,6 @@
 package com.minesweeper.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "player")

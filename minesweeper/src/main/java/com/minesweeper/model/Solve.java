@@ -1,9 +1,10 @@
 package com.minesweeper.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "solve")
+@IdClass(SolveId.class)
 public class Solve {
     @Id
     @ManyToOne
