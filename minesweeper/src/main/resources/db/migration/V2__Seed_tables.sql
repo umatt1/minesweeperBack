@@ -6,8 +6,8 @@ INSERT INTO player (username, password) VALUES
 
 -- Insert data into the 'puzzle' table
 INSERT INTO puzzle (size, mines, layout) VALUES
-    (8, 0, E'\\x' || '0'::bytea), -- A layout with no mines
-    (10, 10, E'\\x180040800000000030218200'::bytea); -- A layout with some mines
+    (8, 0, '{{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0}}'), -- A layout with no mines
+    (10, 10, '{{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}}'); -- A layout with some mines
 
 -- Insert data into the 'solve' table
 INSERT INTO solve (uid, pid, time) VALUES

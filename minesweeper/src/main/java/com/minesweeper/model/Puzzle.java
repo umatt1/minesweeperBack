@@ -17,7 +17,7 @@ public class Puzzle {
 
     @Lob
     @Column(nullable = false)
-    private byte[] layout; // You can use a byte array for VARBINARY data
+    private String layout;
 
     // Constructors, getters, setters, and other methods
 

@@ -11,7 +11,7 @@ CREATE TABLE puzzle (
     -- the layout will be a binary string up to a 25 x 25 puzzle
     -- 1 = mine
     -- 0 = open space
-    layout BYTEA NOT NULL
+    layout INT[25][25] NOT NULL
 );
 
 CREATE TABLE solve (
