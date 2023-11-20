@@ -31,4 +31,28 @@ public class Solve {
         this.puzzle = puzzle;
         this.time = time;
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Puzzle getPuzzle() {
+        return puzzle;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setPuzzle(Puzzle puzzle) {
+        this.puzzle = puzzle;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
 }

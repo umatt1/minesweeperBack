@@ -1,18 +1,39 @@
 package com.minesweeper.controller;
 
-
-import com.minesweeper.service.PlayerService;
+import com.minesweeper.model.Solve;
 import com.minesweeper.service.SolveService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-// SolveController.java
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/solves")
 public class SolveController {
+
     @Autowired
     private SolveService solveService;
 
-    // CRUD operations for Solve entity
+    @GetMapping
+    public List<Solve> getAllSolves() {
+        return solveService.getAllSolves();
+    }
+
+    @GetMapping("/{solveId}")
+    public Optional<Solve> getSolveById(@PathVariable Long solveId) {
+        return solveService.getSolveById(solveId);
+    }
+
+    @PostMapping
+    public Solve createSolve(@RequestBody Solve solve) {
+        return solveService.createSolve(solve);
+    }
+
+    @DeleteMapping("/{solveId}")
+    public void deleteSolve(@PathVariable Long solveId) {
+        solveService.deleteSolve(solveId);
+    }
+
+    // You can add additional methods as needed
 }
