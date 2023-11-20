@@ -20,4 +20,10 @@ public class Puzzle {
     private byte[] layout; // You can use a byte array for VARBINARY data
 
     // Constructors, getters, setters, and other methods
+
+    public Puzzle() {
+    }
+
+
+
 }

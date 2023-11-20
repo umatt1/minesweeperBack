@@ -17,6 +17,9 @@ public class Player {
 
     // Constructors, getters, setters, and other methods
 
+    public Player() {
+    }
+
     public Player(String username, String password) {
         this.username = username;
         this.password = password;
