@@ -19,6 +19,6 @@ CREATE TABLE solve (
     pid INT,
     time TIME,
     PRIMARY KEY (uid, pid),
-    FOREIGN KEY (uid) REFERENCES player (id),
-    FOREIGN KEY (pid) REFERENCES puzzle (id)
+    FOREIGN KEY (uid) REFERENCES player (id) ON DELETE CASCADE,
+    FOREIGN KEY (pid) REFERENCES puzzle (id) ON DELETE CASCADE
 );
