@@ -1,7 +1,5 @@
 package com.minesweeper.controller;
 
-
-import com.minesweeper.service.PlayerService;
 import com.minesweeper.service.PuzzleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
