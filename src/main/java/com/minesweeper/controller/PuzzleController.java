@@ -10,6 +10,7 @@ import java.util.Optional;
 
 // PuzzleController.java
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/puzzles")
 public class PuzzleController {
     @Autowired
