@@ -2,6 +2,7 @@ package com.minesweeper.model;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -11,11 +12,20 @@ public class Puzzle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private int size;
+    @Lob
+    public Long getId() {
+        return id;
+    }
 
-    @Column(nullable = false)
-    private int mines;
+    @Lob
+    @Column(nullable = true)
+    private Date date;
+
+    @Lob
+    @Column(nullable = true)
+    public Date getDate() {
+        return date;
+    }
 
     @Lob
     @Column(nullable = false)
@@ -31,7 +41,5 @@ public class Puzzle {
 
     public Puzzle() {
     }
-
-
 
 }

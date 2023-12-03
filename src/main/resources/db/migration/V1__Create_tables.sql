@@ -6,12 +6,9 @@ CREATE TABLE player (
 
 CREATE TABLE puzzle (
     id SERIAL PRIMARY KEY,
-    size INT NOT NULL,
-    mines INT NOT NULL,
-    -- the layout will be a binary string up to a 25 x 25 puzzle
-    -- 1 = mine
-    -- 0 = open space
-    layout INT[25][25] NOT NULL
+    layout INT[25][25] NOT NULL,
+    -- date is used only if it is a puzzle of the day
+    date DATE
 );
 
 CREATE TABLE solve (
