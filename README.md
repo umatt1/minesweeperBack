@@ -13,6 +13,8 @@ Scripts to create, destroy postgresDB
 ./scripts/stopContainer to stop
 ./scripts/deleteContainer to delete
 
+TODO: MAKE PUZZLE DATE A UNIQUE FIELD??????
+
 [RESOURCES]
 
 https://www.baeldung.com/spring-boot-postgresql-docker
