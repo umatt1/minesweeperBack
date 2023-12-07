@@ -27,15 +27,19 @@ public class Puzzle {
         return date;
     }
 
-    @Lob
-    @Column(nullable = false)
     @ElementCollection
+    @OrderColumn(name = "position")
+    @Column(nullable = false)
     private List<List<Integer>> layout;
 
-    @Lob
     @Column(nullable = false)
     public List<List<Integer>> getLayout() {
         return layout;
+    }
+
+    @Column(nullable = false)
+    public void setLayout(List<List<Integer>> layout) {
+        this.layout = layout;
     }
 
     // Constructors, getters, setters, and other methods
