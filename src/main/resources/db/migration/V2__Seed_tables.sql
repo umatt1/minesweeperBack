@@ -15,5 +15,5 @@ INSERT INTO solve (uid, pid, time) VALUES
     (2, 2, '00:22:45');
 
 -- Create a puzzle of the day
-INSERT INTO puzzle (layout, date) VALUES
-    ('{{1,0,0,1},{0,1,1,0},{0,0,0,0},{0,0,0,0}}', CURRENT_DATE);
+--INSERT INTO puzzle (layout, date) VALUES
+--    ('{{1,0,0,1},{0,1,1,0},{0,0,0,0},{0,0,0,0}}', CURRENT_DATE);

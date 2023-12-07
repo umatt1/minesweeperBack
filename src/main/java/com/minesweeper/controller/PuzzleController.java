@@ -41,10 +41,9 @@ public class PuzzleController {
     }
 
     @PostMapping("/createPuzzleOfTheDay")
-    public Puzzle createPUzzleOfTheDay() {
+    public Puzzle createPuzzleOfTheDay() {
         //Create a puzzle with the day set to the current date
-        Puzzle puzzleOfTheDay = puzzleService.createPuzzleOfTheDay();
-        return puzzleOfTheDay;
+        return puzzleService.createPuzzleOfTheDay();
     }
 
     // Endpoint to get the puzzle for a given date

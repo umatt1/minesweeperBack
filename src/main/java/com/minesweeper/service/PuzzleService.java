@@ -3,9 +3,12 @@ package com.minesweeper.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+
 import com.minesweeper.repo.PuzzleRepository;
 import com.minesweeper.model.Puzzle;
 
@@ -36,17 +39,33 @@ public class PuzzleService {
     }
 
     // You can add additional methods as needed
+    private List<List<Integer>> generateRandomLayout() {
+        // Your logic to generate a random layout goes here
+        // For example, you can create a 2D array with mine positions
 
+        // This is just a placeholder example, adjust it based on your requirements
+        List<List<Integer>> layout = new ArrayList<>();
+        Random random = new Random();
+
+        for (int i = 0; i < 10; i++) {
+            List<Integer> row = new ArrayList<>();
+            for (int j = 0; j < 10; j++) {
+                // 0 represents an empty cell, 1 represents a mine
+                row.add(random.nextInt(2));
+            }
+            layout.add(row);
+        }
+
+        return layout;
+    }
     public Puzzle createPuzzleOfTheDay() {
-        Puzzle puzzle = new Puzzle();
-
-        // Set the date to the current date
-        puzzle.setDate(new Date());
 
         // Your logic to generate the layout for the puzzle
         // For example, you can call a method to generate a random layout
         List<List<Integer>> layout = generateRandomLayout();
-        puzzle.setLayout(layout);
+
+        // Create puzzle
+        Puzzle puzzle = new Puzzle(LocalDate.now(), layout);
 
         // Save the puzzle to the database
         return puzzleRepository.save(puzzle);
