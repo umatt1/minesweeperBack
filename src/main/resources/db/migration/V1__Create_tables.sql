@@ -9,7 +9,7 @@ CREATE TABLE puzzle (
     -- layout is flattened
     layout INT[625] NOT NULL,
     -- date is used only if it is a puzzle of the day
-    date DATE
+    date DATE UNIQUE
 );
 
 CREATE TABLE solve (

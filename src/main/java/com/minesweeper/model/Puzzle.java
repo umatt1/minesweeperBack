@@ -18,7 +18,7 @@ public class Puzzle {
     }
 
     @Lob
-    @Column(nullable = true)
+    @Column(nullable = true, unique = true)
     private LocalDate date;
 
     @Lob
