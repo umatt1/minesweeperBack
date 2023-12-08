@@ -13,7 +13,14 @@ Scripts to create, destroy postgresDB
 ./scripts/stopContainer to stop
 ./scripts/deleteContainer to delete
 
-TODO: MAKE PUZZLE DATE A UNIQUE FIELD??????
+TODO:
+More testing
+Secure password storage
+More user details
+Leaderboards?
+Index puzzles by date
+
+
 
 [RESOURCES]
 
