@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 public interface PuzzleRepository extends JpaRepository<Puzzle, Long> {
-    // You can add custom query methods here if needed
     @Query("SELECT p FROM Puzzle p WHERE p.date = :date")
     Optional<Puzzle> findByDate(LocalDate date);
 }

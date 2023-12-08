@@ -33,5 +33,4 @@ public class SolveService {
         solveRepository.deleteById(solveId);
     }
 
-    // You can add additional methods as needed
 }

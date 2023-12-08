@@ -42,7 +42,7 @@ public class PuzzleController {
 
     @PostMapping("/createPuzzleOfTheDay")
     public Puzzle createPuzzleOfTheDay() {
-        //Create a puzzle with the day set to the current date
+        // Create a puzzle with the day set to the current date
         return puzzleService.createPuzzleOfTheDay();
     }
 
