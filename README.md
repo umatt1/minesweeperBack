@@ -19,7 +19,7 @@ Secure password storage
 More user details
 Leaderboards?
 Index puzzles by date
-
+Set up solves table for how users will view their past history as well as an export
 
 
 [RESOURCES]
