@@ -3,8 +3,10 @@ package com.minesweeper.controller;
 import com.minesweeper.model.Puzzle;
 import com.minesweeper.service.PuzzleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,5 +38,17 @@ public class PuzzleController {
     @DeleteMapping("/{puzzleId}")
     public void deletePlayer(@PathVariable Long puzzleId) {
         puzzleService.deletePuzzle(puzzleId);
+    }
+
+    @PostMapping("/createPuzzleOfTheDay")
+    public Puzzle createPuzzleOfTheDay() {
+        //Create a puzzle with the day set to the current date
+        return puzzleService.createPuzzleOfTheDay();
+    }
+
+    // Endpoint to get the puzzle for a given date
+    @GetMapping("/getPuzzleByDate")
+    public Optional<Puzzle> getPuzzleByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return puzzleService.getPuzzleByDate(date);
     }
 }

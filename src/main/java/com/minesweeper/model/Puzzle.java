@@ -2,7 +2,7 @@ package com.minesweeper.model;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -18,23 +18,27 @@ public class Puzzle {
     }
 
     @Lob
-    @Column(nullable = true)
-    private Date date;
+    @Column(nullable = true, unique = true)
+    private LocalDate date;
 
     @Lob
     @Column(nullable = true)
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
     @Lob
     @Column(nullable = false)
-    private List<List<Integer>> layout;
+    private List<Integer> layout;
 
-    @Lob
     @Column(nullable = false)
-    public List<List<Integer>> getLayout() {
+    public List<Integer> getLayout() {
         return layout;
+    }
+
+    @Column(nullable = false)
+    public void setLayout(List<Integer> layout) {
+        this.layout = layout;
     }
 
     // Constructors, getters, setters, and other methods
@@ -42,4 +46,8 @@ public class Puzzle {
     public Puzzle() {
     }
 
+    public Puzzle(LocalDate date, List<Integer> layout) {
+        this.date = date;
+        this.layout = layout;
+    }
 }
