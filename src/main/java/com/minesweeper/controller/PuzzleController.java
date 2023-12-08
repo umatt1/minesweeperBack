@@ -48,7 +48,11 @@ public class PuzzleController {
 
     // Endpoint to get the puzzle for a given date
     @GetMapping("/getPuzzleByDate")
-    public Optional<Puzzle> getPuzzleByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+    public Optional<Puzzle> getPuzzleByDate(@RequestParam(required = false)
+                                            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        if (date == null) {
+            date = LocalDate.now();
+        }
         return puzzleService.getPuzzleByDate(date);
     }
 }
