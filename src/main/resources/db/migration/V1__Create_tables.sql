@@ -6,7 +6,8 @@ CREATE TABLE player (
 
 CREATE TABLE puzzle (
     id SERIAL PRIMARY KEY,
-    layout INT[25][25] NOT NULL,
+    -- layout is flattened
+    layout INT[625] NOT NULL,
     -- date is used only if it is a puzzle of the day
     date DATE
 );

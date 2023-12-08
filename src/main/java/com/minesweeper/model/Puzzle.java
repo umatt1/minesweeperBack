@@ -27,18 +27,17 @@ public class Puzzle {
         return date;
     }
 
-    @ElementCollection
-    @OrderColumn(name = "position")
+    @Lob
     @Column(nullable = false)
-    private List<List<Integer>> layout;
+    private List<Integer> layout;
 
     @Column(nullable = false)
-    public List<List<Integer>> getLayout() {
+    public List<Integer> getLayout() {
         return layout;
     }
 
     @Column(nullable = false)
-    public void setLayout(List<List<Integer>> layout) {
+    public void setLayout(List<Integer> layout) {
         this.layout = layout;
     }
 
@@ -47,7 +46,7 @@ public class Puzzle {
     public Puzzle() {
     }
 
-    public Puzzle(LocalDate date, List<List<Integer>> layout) {
+    public Puzzle(LocalDate date, List<Integer> layout) {
         this.date = date;
         this.layout = layout;
     }

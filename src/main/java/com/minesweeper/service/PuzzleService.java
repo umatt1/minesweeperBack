@@ -39,12 +39,13 @@ public class PuzzleService {
     }
 
     // You can add additional methods as needed
-    private List<List<Integer>> generateRandomLayout() {
+    private List<Integer> generateRandomLayout() {
         // Your logic to generate a random layout goes here
         // For example, you can create a 2D array with mine positions
 
         // This is just a placeholder example, adjust it based on your requirements
         List<List<Integer>> layout = new ArrayList<>();
+        List<Integer> flattenedLayout = new ArrayList<>();
         Random random = new Random();
 
         for (int i = 0; i < 10; i++) {
@@ -52,17 +53,18 @@ public class PuzzleService {
             for (int j = 0; j < 10; j++) {
                 // 0 represents an empty cell, 1 represents a mine
                 row.add(random.nextInt(2));
+                flattenedLayout.add(random.nextInt(2));
             }
             layout.add(row);
         }
 
-        return layout;
+        return flattenedLayout;
     }
     public Puzzle createPuzzleOfTheDay() {
 
         // Your logic to generate the layout for the puzzle
         // For example, you can call a method to generate a random layout
-        List<List<Integer>> layout = generateRandomLayout();
+        List<Integer> layout = generateRandomLayout();
 
         // Create puzzle
         Puzzle puzzle = new Puzzle(LocalDate.now(), layout);
