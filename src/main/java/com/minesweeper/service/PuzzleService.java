@@ -67,7 +67,7 @@ public class PuzzleService {
         List<Integer> layout = generateRandomLayout();
 
         // Create puzzle
-        Puzzle puzzle = new Puzzle(LocalDate.now(), layout);
+        Puzzle puzzle = new Puzzle(LocalDate.now(), layout, 10L, 10L);
 
         // Save the puzzle to the database
         return puzzleRepository.save(puzzle);

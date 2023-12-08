@@ -6,10 +6,11 @@ CREATE TABLE player (
 
 CREATE TABLE puzzle (
     id SERIAL PRIMARY KEY,
-    -- layout is flattened
-    layout INT[625] NOT NULL,
-    -- date is used only if it is a puzzle of the day
-    date DATE UNIQUE
+    width INT NOT NULL,
+    height INT NOT NULL,
+    layout INT[] NOT NULL,
+    date DATE UNIQUE,
+    CONSTRAINT layout_size_constraint CHECK (array_length(layout, 1) = width * height)
 );
 
 CREATE TABLE solve (

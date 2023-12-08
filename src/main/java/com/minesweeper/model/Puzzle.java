@@ -12,28 +12,48 @@ public class Puzzle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
+    @Column(nullable = true, unique = true)
+    private LocalDate date;
+
+    @Column(nullable = false)
+    private List<Integer> layout;
+
+    @Column(nullable = false)
+    private Long height;
+
+    @Column(nullable = false)
+    private Long width;
+
+    @Column(nullable = false)
+    public List<Integer> getLayout() {
+        return layout;
+    }
+
     public Long getId() {
         return id;
     }
 
-    @Lob
-    @Column(nullable = true, unique = true)
-    private LocalDate date;
-
-    @Lob
     @Column(nullable = true)
     public LocalDate getDate() {
         return date;
     }
 
-    @Lob
     @Column(nullable = false)
-    private List<Integer> layout;
+    public Long getHeight() {
+        return height;
+    }
 
     @Column(nullable = false)
-    public List<Integer> getLayout() {
-        return layout;
+    public void setHeight(Long height) {
+        this.height = height;
+    }
+
+    public Long getWidth() {
+        return width;
+    }
+
+    public void setWidth(Long width) {
+        this.width = width;
     }
 
     @Column(nullable = false)
@@ -41,13 +61,16 @@ public class Puzzle {
         this.layout = layout;
     }
 
+
     // Constructors, getters, setters, and other methods
 
     public Puzzle() {
     }
 
-    public Puzzle(LocalDate date, List<Integer> layout) {
+    public Puzzle(LocalDate date, List<Integer> layout, Long height, Long width) {
         this.date = date;
         this.layout = layout;
+        this.height = height;
+        this.width = width;
     }
 }
