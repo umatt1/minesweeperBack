@@ -30,7 +30,7 @@ class PlayerServiceTest {
     @Test
     void getAllPlayers() {
         // Mock the behavior of the repository
-        List<Player> players = Arrays.asList(new Player("1L", "John"), new Player("2L", "Jane"));
+        List<Player> players = Arrays.asList(new Player(), new Player());
         Mockito.when(playerRepository.findAll()).thenReturn(players);
 
         // Call the service method
@@ -43,7 +43,7 @@ class PlayerServiceTest {
     @Test
     void getPlayerById() {
         // Mock the behavior of the repository
-        Player player = new Player("1L", "John");
+        Player player = new Player();
         Mockito.when(playerRepository.findById(1L)).thenReturn(Optional.of(player));
 
         // Call the service method
@@ -56,7 +56,7 @@ class PlayerServiceTest {
     @Test
     void createPlayer() {
         // Mock the behavior of the repository
-        Player player = new Player("1L", "John");
+        Player player = new Player();
         Mockito.when(playerRepository.save(any(Player.class))).thenReturn(player);
 
         // Call the service method
