@@ -46,7 +46,7 @@ public class SecurityConfig {
 
         // Disable Cross-Site Request Forgery (CSRF)
         // In general, not required for stateless REST APIs that use POST, PUT, DELETE, and/or PATCH
-        http.csrf(csrf -> csrf.disable());
+        //http.csrf(csrf -> csrf.disable());
 
         return http.build();
     }
