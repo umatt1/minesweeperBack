@@ -42,11 +42,11 @@ public class SecurityConfig {
         );
 
         // Use HTTP Basic authentication
-        http.httpBasic(Customizer.withDefaults());
+        //http.httpBasic(Customizer.withDefaults());
 
         // Disable Cross-Site Request Forgery (CSRF)
         // In general, not required for stateless REST APIs that use POST, PUT, DELETE, and/or PATCH
-        //http.csrf(csrf -> csrf.disable());
+        http.csrf(csrf -> csrf.disable());
 
         return http.build();
     }
