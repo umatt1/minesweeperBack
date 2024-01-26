@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/players")
 public class PlayerController {
 
@@ -49,5 +49,25 @@ public class PlayerController {
         playerService.deletePlayer(playerId);
     }
 
-    // You can add additional methods as needed
+
+    /*
+    All the mappings below is for creating a working login page.
+    It may and probably does contain several redundancies with the above mappings
+     */
+
+    @PostMapping("/signup")
+    public void signUp() {
+
+    }
+
+    @PostMapping("/signin")
+    public void signIn() {
+
+    }
+
+    @GetMapping("/userContent")
+    public void userContent() {
+
+    }
+
 }
