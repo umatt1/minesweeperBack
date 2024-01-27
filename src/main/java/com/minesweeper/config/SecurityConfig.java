@@ -6,63 +6,68 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
-    public UserDetailsManager userDetailsManager(DataSource dataSource) {
-
-        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-
-        // define query to retrieve a user by username
-        jdbcUserDetailsManager.setUsersByUsernameQuery(
-                "select id, username, password from player where id=?");
-
-        // define query to retrieve the authorities/roles by username
-        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
-                "select id, role from player where id=?");
-
-        return jdbcUserDetailsManager;
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                // disable csrf
+                .csrf(csrf -> csrf.disable())
+                // authorize all requests
+                .authorizeHttpRequests( auth -> auth
+                        .anyRequest().authenticated()
+                )
+                // stateless session management
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                // not entirely sure what this is
+                .httpBasic(Customizer.withDefaults())
+                .build();
     }
-
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(configurer ->
-                configurer
-                        .requestMatchers(HttpMethod.GET, "/**").permitAll() // permit all GET requests
-                        .requestMatchers(HttpMethod.POST, "/**").permitAll() // permit all POST requests
-                        .requestMatchers(HttpMethod.PUT, "/**").permitAll() // permit all PUT requests
-                        .requestMatchers(HttpMethod.DELETE, "/**").permitAll() // permit all DELETE requests
+    public InMemoryUserDetailsManager user() {
+        return new InMemoryUserDetailsManager(
+                User.withUsername("user")
+                        .password("{noop}password")
+                        .authorities("read")
+                        .build()
         );
-
-        // Use HTTP Basic authentication
-        //http.httpBasic(Customizer.withDefaults());
-
-        // Disable Cross-Site Request Forgery (CSRF)
-        // In general, not required for stateless REST APIs that use POST, PUT, DELETE, and/or PATCH
-        http.csrf(csrf -> csrf.disable());
-
-        return http.build();
     }
 
+
+//    @Bean
+//    public UserDetailsService userDetailsService(DataSource dataSource) {
+//        return new JdbcUserDetailsManager(dataSource);
+//    }
+//
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeHttpRequests(configurer ->
+//                        configurer
+//                                .requestMatchers(HttpMethod.GET, "/**").permitAll()
+//                                .requestMatchers(HttpMethod.POST, "/**").permitAll()
+//                                .requestMatchers(HttpMethod.PUT, "/**").permitAll()
+//                                .requestMatchers(HttpMethod.DELETE, "/**").permitAll()
+//                )
+//                .formLogin(Customizer.withDefaults())  // Enable form-based login
+//                .csrf().disable()
+//                .logout()
+//                .deleteCookies("JSESSIONID")  // Delete the session cookie on logout
+//                .invalidateHttpSession(true)
+//                .clearAuthentication(true);
+//
+//        return http.build();
+//    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
