@@ -28,7 +28,6 @@ import javax.sql.DataSource;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-
     @Autowired
     private DataSource dataSource;
 
@@ -50,34 +49,16 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
-        httpSecurity.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-                .requestMatchers(PathRequest.toH2Console()).permitAll().anyRequest().authenticated()).formLogin(AbstractAuthenticationFilterConfigurer::permitAll);
-        httpSecurity.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.ignoringRequestMatchers(PathRequest.toH2Console()));
-        httpSecurity.headers(httpSecurityHeadersConfigurer ->
-                httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeHttpRequests(
+                        authorizationManagerRequestMatcherRegistry ->
+                                authorizationManagerRequestMatcherRegistry
+                                        .anyRequest().authenticated()
+                )
+                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll);
+
         return httpSecurity.build();
     }
 
-//    @Bean
-//    DataSource dataSource() {
-//        // TODO: define how this works
-//    }
-//
-//    @Bean
-//    JdbcUserDetailsManager users(DataSource dataSource) {
-//        // TODO: Wire this up
-//        return new JdbcUserDetailsManager(dataSource);
-//    }
-//
-//    @Bean
-//    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http
-//                .authorizeHttpRequests(auth -> auth
-//                        .anyRequest().authenticated()
-//                )
-//                .formLogin(Customizer.withDefaults())
-//                .build();
-//    }
 
 }
