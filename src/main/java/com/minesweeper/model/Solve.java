@@ -10,7 +10,7 @@ import java.sql.Time;
 public class Solve {
     @Id
     @ManyToOne
-    @JoinColumn(name = "uid", referencedColumnName = "id")
+    @JoinColumn(name = "username", referencedColumnName = "username")
     private Player player;
 
     @Id

@@ -36,7 +36,7 @@ public class PlayerController {
         try {
             Player createdPlayer = playerService.createPlayer(player);
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                    .buildAndExpand(createdPlayer.getId()).toUri();
+                    .buildAndExpand(createdPlayer.getEmail()).toUri();
             return ResponseEntity.created(location).build();
         } catch (RuntimeException e) {
             // Handle the exception, e.g., duplicate username or email

@@ -1,10 +1,14 @@
 CREATE TABLE player (
-    id SERIAL PRIMARY KEY,
     username VARCHAR(15) NOT NULL UNIQUE,
-    email VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) PRIMARY KEY,
     password VARCHAR(255) NOT NULL,
-    role VARCHAR(15) NOT NULL DEFAULT('USER')
-    CONSTRAINT role_check_constraint CHECK (role in ('USER', 'ADMIN'))
+    enabled BOOLEAN NOT NULL DEFAULT true
+);
+
+CREATE TABLE authority (
+    email VARCHAR(255) PRIMARY KEY,
+    authority VARCHAR(255) NOT NULL,
+    FOREIGN KEY (email) REFERENCES player(email)
 );
 
 CREATE TABLE puzzle (
@@ -17,10 +21,10 @@ CREATE TABLE puzzle (
 );
 
 CREATE TABLE solve (
-    uid INT,
+    username VARCHAR(15),
     pid INT,
     time TIME,
-    PRIMARY KEY (uid, pid),
-    FOREIGN KEY (uid) REFERENCES player (id) ON DELETE CASCADE,
+    PRIMARY KEY (username, pid),
+    FOREIGN KEY (username) REFERENCES player (username) ON DELETE CASCADE,
     FOREIGN KEY (pid) REFERENCES puzzle (id) ON DELETE CASCADE
 );
