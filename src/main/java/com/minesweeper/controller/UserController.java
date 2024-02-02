@@ -20,59 +20,39 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
-    }
+//    @GetMapping
+//    public List<User> getAllUsers() {
+//        return userService.getAllUsers();
+//    }
 
     @GetMapping("/")
     public String hello() {
         return "Hello world";
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-        Optional<User> user = userService.getPlayerById(userId);
-        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+//    @GetMapping("/{userId}")
+//    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+//        Optional<User> user = userService.getPlayerById(userId);
+//        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+//    }
 
-    @PostMapping
-    public ResponseEntity<Object> createUser(@RequestBody User user) {
-        try {
-            User createdUser = userService.createPlayer(user);
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                    .buildAndExpand(createdUser.getEmail()).toUri();
-            return ResponseEntity.created(location).build();
-        } catch (RuntimeException e) {
-            // Handle the exception, e.g., duplicate username or email
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        }
-    }
+//    @PostMapping
+//    public ResponseEntity<Object> createUser(@RequestBody User user) {
+//        try {
+//            User createdUser = userService.createPlayer(user);
+//            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//                    .buildAndExpand(createdUser.getEmail()).toUri();
+//            return ResponseEntity.created(location).build();
+//        } catch (RuntimeException e) {
+//            // Handle the exception, e.g., duplicate username or email
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+//        }
+//    }
 
-    @DeleteMapping("/{playerId}")
-    public void deleteUser(@PathVariable Long userId) {
-        userService.deletePlayer(userId);
-    }
+//    @DeleteMapping("/{playerId}")
+//    public void deleteUser(@PathVariable Long userId) {
+//        userService.deletePlayer(userId);
+//    }
 
-
-    /*
-    All the mappings below is for creating a working login page.
-    It may and probably does contain several redundancies with the above mappings
-     */
-
-    @PostMapping("/signup")
-    public void signUp() {
-
-    }
-
-    @PostMapping("/signin")
-    public void signIn() {
-
-    }
-
-    @GetMapping("/userContent")
-    public void userContent() {
-
-    }
 
 }
