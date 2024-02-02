@@ -1,4 +1,5 @@
 -- Role Table
+CREATE SEQUENCE roles_seq;
 CREATE TABLE roles (
     role_id SERIAL PRIMARY KEY,
     authority VARCHAR(255) NOT NULL
