@@ -1,8 +1,7 @@
 package com.minesweeper.service;
 
-import com.minesweeper.model.Player;
-import com.minesweeper.repo.PlayerRepository;
-import com.minesweeper.service.PlayerService;
+import com.minesweeper.model.User;
+import com.minesweeper.repo.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,68 +18,68 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 
 @SpringBootTest
-class PlayerServiceTest {
+class UserServiceTest {
 
     @Mock
-    private PlayerRepository playerRepository;
+    private UserRepository userRepository;
 
     @InjectMocks
-    private PlayerService playerService;
+    private UserService userService;
 
     @Test
     void getAllPlayers() {
         // Mock the behavior of the repository
-        List<Player> players = Arrays.asList(new Player(), new Player());
-        Mockito.when(playerRepository.findAll()).thenReturn(players);
+        List<User> users = Arrays.asList(new User(), new User());
+        Mockito.when(userRepository.findAll()).thenReturn(users);
 
         // Call the service method
-        List<Player> result = playerService.getAllPlayers();
+        List<User> result = userService.getAllUsers();
 
         // Verify the result
-        assertEquals(players, result);
+        assertEquals(users, result);
     }
 
     @Test
     void getPlayerById() {
         // Mock the behavior of the repository
-        Player player = new Player();
-        Mockito.when(playerRepository.findById(1L)).thenReturn(Optional.of(player));
+        User user = new User();
+        Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
         // Call the service method
-        Optional<Player> result = playerService.getPlayerById(1L);
+        Optional<User> result = userService.getPlayerById(1L);
 
         // Verify the result
-        assertEquals(Optional.of(player), result);
+        assertEquals(Optional.of(user), result);
     }
 
     @Test
     void createPlayer() {
         // Mock the behavior of the repository
-        Player player = new Player();
-        Mockito.when(playerRepository.save(any(Player.class))).thenReturn(player);
+        User user = new User();
+        Mockito.when(userRepository.save(any(User.class))).thenReturn(user);
 
         // Call the service method
-        Player result = playerService.createPlayer(player);
+        User result = userService.createPlayer(user);
 
         // Verify the result
-        assertEquals(player, result);
+        assertEquals(user, result);
     }
 
     @Test
     void deletePlayer() {
         // Call the service method
-        playerService.deletePlayer(1L);
+        userService.deletePlayer(1L);
 
         // Verify that the repository method was called once with the correct argument
-        Mockito.verify(playerRepository, times(1)).deleteById(1L);
+        Mockito.verify(userRepository, times(1)).deleteById(1L);
     }
 
     @Test
     void deleteNonexistentPlayer() {
         // Mock the behavior of the repository to throw an exception
-        Mockito.doThrow(new IllegalArgumentException("Player not found")).when(playerRepository).deleteById(1L);
+        Mockito.doThrow(new IllegalArgumentException("Player not found")).when(userRepository).deleteById(1L);
 
         // Call the service method and expect an exception
-        assertThrows(IllegalArgumentException.class, () -> playerService.deletePlayer(1L));
+        assertThrows(IllegalArgumentException.class, () -> userService.deletePlayer(1L));
     }
 }

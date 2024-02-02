@@ -11,7 +11,7 @@ public class Solve {
     @Id
     @ManyToOne
     @JoinColumn(name = "username", referencedColumnName = "username")
-    private Player player;
+    private User user;
 
     @Id
     @ManyToOne
@@ -26,14 +26,14 @@ public class Solve {
     public Solve() {
     }
 
-    public Solve(Player player, Puzzle puzzle, Time time) {
-        this.player = player;
+    public Solve(User user, Puzzle puzzle, Time time) {
+        this.user = user;
         this.puzzle = puzzle;
         this.time = time;
     }
 
-    public Player getPlayer() {
-        return player;
+    public User getPlayer() {
+        return user;
     }
 
     public Puzzle getPuzzle() {
@@ -44,8 +44,8 @@ public class Solve {
         return time;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayer(User user) {
+        this.user = user;
     }
 
     public void setPuzzle(Puzzle puzzle) {

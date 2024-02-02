@@ -1,7 +1,7 @@
 package com.minesweeper.controller;
 
-import com.minesweeper.model.Player;
-import com.minesweeper.service.PlayerService;
+import com.minesweeper.model.User;
+import com.minesweeper.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,28 +15,33 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/players")
-public class PlayerController {
+public class UserController {
 
     @Autowired
-    private PlayerService playerService;
+    private UserService userService;
 
     @GetMapping
-    public List<Player> getAllPlayers() {
-        return playerService.getAllPlayers();
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
-    @GetMapping("/{playerId}")
-    public ResponseEntity<Player> getPlayerById(@PathVariable Long playerId) {
-        Optional<Player> player = playerService.getPlayerById(playerId);
-        return player.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/")
+    public String hello() {
+        return "Hello world";
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+        Optional<User> user = userService.getPlayerById(userId);
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Object> createPlayer(@RequestBody Player player) {
+    public ResponseEntity<Object> createUser(@RequestBody User user) {
         try {
-            Player createdPlayer = playerService.createPlayer(player);
+            User createdUser = userService.createPlayer(user);
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                    .buildAndExpand(createdPlayer.getEmail()).toUri();
+                    .buildAndExpand(createdUser.getEmail()).toUri();
             return ResponseEntity.created(location).build();
         } catch (RuntimeException e) {
             // Handle the exception, e.g., duplicate username or email
@@ -45,8 +50,8 @@ public class PlayerController {
     }
 
     @DeleteMapping("/{playerId}")
-    public void deletePlayer(@PathVariable Long playerId) {
-        playerService.deletePlayer(playerId);
+    public void deleteUser(@PathVariable Long userId) {
+        userService.deletePlayer(userId);
     }
 
 

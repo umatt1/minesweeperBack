@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class SolveId implements Serializable {
 
-    private Player player;
+    private User user;
     private Puzzle puzzle;
 
     // constructors, equals, hashCode methods

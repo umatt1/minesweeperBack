@@ -1,8 +1,7 @@
 package com.minesweeper.controller;
 
-import com.minesweeper.controller.PlayerController;
-import com.minesweeper.model.Player;
-import com.minesweeper.service.PlayerService;
+import com.minesweeper.model.User;
+import com.minesweeper.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,35 +19,35 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 
 @SpringBootTest
-class PlayerControllerTest {
+class UserControllerTest {
 
     @Mock
-    private PlayerService playerService;
+    private UserService userService;
 
     @InjectMocks
-    private PlayerController playerController;
+    private UserController userController;
 
     @Test
     void getAllPlayers() {
         // Mock the behavior of the service
-        List<Player> players = Arrays.asList(new Player(), new Player());
-        Mockito.when(playerService.getAllPlayers()).thenReturn(players);
+        List<User> users = Arrays.asList(new User(), new User());
+        Mockito.when(userService.getAllUsers()).thenReturn(users);
 
         // Call the controller method
-        List<Player> result = playerController.getAllPlayers();
+        List<User> result = userController.getAllUsers();
 
         // Verify the result
-        assertEquals(players, result);
+        assertEquals(users, result);
     }
 
     @Test
     void getPlayerById() {
         // Mock the behavior of the service
-        Player player = new Player();
-        Mockito.when(playerService.getPlayerById(1L)).thenReturn(Optional.of(player));
+        User user = new User();
+        Mockito.when(userService.getPlayerById(1L)).thenReturn(Optional.of(user));
 
         // Call the controller method
-        ResponseEntity<Player> result = playerController.getPlayerById(1L);
+        ResponseEntity<User> result = userController.getUserById(1L);
 
         // Verify the result
         //assertEquals(Optional.of(player), result);
@@ -57,11 +56,11 @@ class PlayerControllerTest {
     @Test
     void createPlayer() {
         // Mock the behavior of the service
-        Player player = new Player();
-        Mockito.when(playerService.createPlayer(any(Player.class))).thenReturn(player);
+        User user = new User();
+        Mockito.when(userService.createPlayer(any(User.class))).thenReturn(user);
 
         // Call the controller method
-        ResponseEntity<Object> result = playerController.createPlayer(player);
+        ResponseEntity<Object> result = userController.createUser(user);
 
         // Verify the result
         //assertEquals(player, result);
@@ -70,18 +69,18 @@ class PlayerControllerTest {
     @Test
     void deletePlayer() {
         // Call the controller method
-        playerController.deletePlayer(1L);
+        userController.deleteUser(1L);
 
         // Verify that the service method was called once with the correct argument
-        Mockito.verify(playerService, times(1)).deletePlayer(1L);
+        Mockito.verify(userService, times(1)).deletePlayer(1L);
     }
 
     @Test
     void deleteNonexistentPlayer() {
         // Mock the behavior of the service to throw an exception
-        Mockito.doThrow(new IllegalArgumentException("Player not found")).when(playerService).deletePlayer(1L);
+        Mockito.doThrow(new IllegalArgumentException("Player not found")).when(userService).deletePlayer(1L);
 
         // Call the controller method and expect an exception
-        assertThrows(IllegalArgumentException.class, () -> playerController.deletePlayer(1L));
+        assertThrows(IllegalArgumentException.class, () -> userController.deleteUser(1L));
     }
 }
