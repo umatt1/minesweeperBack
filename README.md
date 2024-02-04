@@ -25,3 +25,5 @@ Set up solves table for how users will view their past history as well as an exp
 [RESOURCES]
 
 https://www.baeldung.com/spring-boot-postgresql-docker
+https://www.bezkoder.com/spring-boot-react-jwt-auth/
+https://www.youtube.com/watch?v=TeBt0Ike_Tk

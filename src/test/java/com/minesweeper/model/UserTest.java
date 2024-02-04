@@ -1,10 +1,9 @@
 package com.minesweeper.model;
 
-import com.minesweeper.model.Player;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PlayerTest {
+class UserTest {
 
     @Test
     void playerConstructorAndGetterSetter() {
@@ -13,14 +12,14 @@ class PlayerTest {
         String password = "testPassword";
 
         // When
-        Player player = new Player();
+        User user = new User();
 
-        player.setUsername("newUsername");
-        player.setPassword("newPassword");
+        user.setUsername("newUsername");
+        user.setPassword("newPassword");
 
         // Then
-        assertThat(player.getUsername()).isEqualTo("newUsername");
-        assertThat(player.getPassword()).isEqualTo("newPassword");
+        assertThat(user.getUsername()).isEqualTo("newUsername");
+        assertThat(user.getPassword()).isEqualTo("newPassword");
     }
 
     /*@Test

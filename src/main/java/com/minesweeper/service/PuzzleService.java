@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 import com.minesweeper.repo.PuzzleRepository;
 import com.minesweeper.model.Puzzle;
@@ -38,17 +35,29 @@ public class PuzzleService {
         puzzleRepository.deleteById(puzzleId);
     }
 
-    // You can add additional methods as needed
     private List<Integer> generateRandomLayout() {
         List<Integer> flattenedLayout = new ArrayList<>();
         Random random = new Random();
+        int numMines = 10;
+        Set<Integer> mines = new HashSet<>();
 
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                // 0 represents an empty cell, 1 represents a mine
-                flattenedLayout.add(random.nextInt(2));
+        // choose mines
+        for (int i = 0; i < numMines; i++) {
+            int indexToSwap = random.nextInt(100);
+            while(mines.contains(indexToSwap)) {
+                indexToSwap = random.nextInt(100);
+            }
+            mines.add(indexToSwap);
+        }
+
+        for (int i = 0; i < 100; i++) {
+            if (mines.contains(i)) {
+                flattenedLayout.add(1);
+            } else {
+                flattenedLayout.add(0);
             }
         }
+
 
         return flattenedLayout;
     }

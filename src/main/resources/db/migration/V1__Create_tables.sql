@@ -1,26 +1,36 @@
-CREATE TABLE player (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(15) NOT NULL UNIQUE,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    role VARCHAR(15) NOT NULL DEFAULT('USER')
-    CONSTRAINT role_check_constraint CHECK (role in ('USER', 'ADMIN'))
+-- Role Table
+CREATE TABLE roles (
+    role_id SERIAL PRIMARY KEY,
+    authority VARCHAR(255) NOT NULL
 );
 
+-- User Table
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Puzzle Table
 CREATE TABLE puzzle (
-    id SERIAL PRIMARY KEY,
-    width INT NOT NULL,
-    height INT NOT NULL,
-    layout INT[] NOT NULL,
+    id BIGINT PRIMARY KEY,
     date DATE UNIQUE,
-    CONSTRAINT layout_size_constraint CHECK (array_length(layout, 1) = width * height)
+    layout INTEGER ARRAY NOT NULL,
+    height BIGINT NOT NULL,
+    width BIGINT NOT NULL
 );
 
+-- Solve Table
 CREATE TABLE solve (
-    uid INT,
-    pid INT,
+    username VARCHAR(255) REFERENCES users(username),
+    pid BIGINT REFERENCES puzzle(id),
     time TIME,
-    PRIMARY KEY (uid, pid),
-    FOREIGN KEY (uid) REFERENCES player (id) ON DELETE CASCADE,
-    FOREIGN KEY (pid) REFERENCES puzzle (id) ON DELETE CASCADE
+    PRIMARY KEY (username, pid)
+);
+
+-- User-Role Junction Table
+CREATE TABLE user_role_junction (
+    user_id INTEGER REFERENCES users(user_id),
+    role_id INTEGER REFERENCES roles(role_id),
+    PRIMARY KEY (user_id, role_id)
 );
