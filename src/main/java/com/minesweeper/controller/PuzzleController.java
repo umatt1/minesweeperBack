@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
-@RequestMapping("/puzzles")
+@RequestMapping("/puzzle")
 public class PuzzleController {
     @Autowired
     private PuzzleService puzzleService;
