@@ -1,5 +1,6 @@
 package com.minesweeper.controller;
 
+import com.minesweeper.model.LoginResponseDTO;
 import com.minesweeper.model.RegistrationDTO;
 import com.minesweeper.model.User;
 import com.minesweeper.service.AuthenticationService;
@@ -19,4 +20,8 @@ public class AuthenticationController {
         return authenticationService.registerUser(body.getUsername(), body.getPassword());
     }
 
+    @PostMapping("/login")
+    public LoginResponseDTO loginUser(@RequestBody RegistrationDTO body){
+        return authenticationService.loginUser(body.getUsername(), body.getPassword());
+    }
 }

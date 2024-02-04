@@ -1,5 +1,4 @@
 -- Role Table
-CREATE SEQUENCE roles_seq;
 CREATE TABLE roles (
     role_id SERIAL PRIMARY KEY,
     authority VARCHAR(255) NOT NULL
@@ -9,13 +8,12 @@ CREATE TABLE roles (
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    CONSTRAINT username_unique UNIQUE (username)
+    password VARCHAR(255) NOT NULL
 );
 
 -- Puzzle Table
 CREATE TABLE puzzle (
-    id SERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     date DATE UNIQUE,
     layout INTEGER ARRAY NOT NULL,
     height BIGINT NOT NULL,
