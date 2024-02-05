@@ -5,6 +5,8 @@ import com.minesweeper.model.RegistrationDTO;
 import com.minesweeper.model.User;
 import com.minesweeper.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,7 +23,11 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public LoginResponseDTO loginUser(@RequestBody RegistrationDTO body){
-        return authenticationService.loginUser(body.getUsername(), body.getPassword());
+    public ResponseEntity<LoginResponseDTO> loginUser(@RequestBody RegistrationDTO body){
+        try {
+            return new ResponseEntity<>(authenticationService.loginUser(body.getUsername(), body.getPassword()), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new LoginResponseDTO(), HttpStatus.BAD_REQUEST);
+        }
     }
 }
