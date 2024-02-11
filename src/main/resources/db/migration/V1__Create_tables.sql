@@ -13,7 +13,7 @@ CREATE TABLE users (
 
 -- Puzzle Table
 CREATE TABLE puzzle (
-    id BIGINT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     date DATE UNIQUE,
     layout INTEGER ARRAY NOT NULL,
     height BIGINT NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE puzzle (
 -- Solve Table
 CREATE TABLE solve (
     username VARCHAR(255) REFERENCES users(username),
-    pid BIGINT REFERENCES puzzle(id),
+    pid INTEGER REFERENCES puzzle(id),
     time TIME,
     PRIMARY KEY (username, pid)
 );

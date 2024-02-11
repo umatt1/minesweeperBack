@@ -10,7 +10,7 @@ import java.util.List;
 public class Puzzle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = true, unique = true)
     private LocalDate date;
@@ -29,7 +29,7 @@ public class Puzzle {
         return layout;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
