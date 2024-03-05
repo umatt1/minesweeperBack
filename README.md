@@ -15,7 +15,6 @@ Scripts to create, destroy postgresDB
 
 TODO:
 More testing
-Secure password storage
 More user details
 Leaderboards?
 Index puzzles by date
@@ -27,3 +26,4 @@ Set up solves table for how users will view their past history as well as an exp
 https://www.baeldung.com/spring-boot-postgresql-docker
 https://www.bezkoder.com/spring-boot-react-jwt-auth/
 https://www.youtube.com/watch?v=TeBt0Ike_Tk
+https://www.youtube.com/watch?v=GowFk_5Rx_I
