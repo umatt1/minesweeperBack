@@ -47,15 +47,15 @@ resource "aws_instance" "ec2_instance" {
 
 # Create an RDS instance running PostgreSQL
 resource "aws_db_instance" "rds_instance" {
-  identifier            = "my-rds-instance"
+  identifier            = "minesweeperdb"
   allocated_storage     = 20
   storage_type          = "gp2"
   engine                = "postgres"
   engine_version        = "12.5"
   instance_class        = "db.t2.micro"
-  db_name                  = "mydatabase"
-  username              = "admin"
-  password              = "password"
+  db_name               = "minesweeperdb"
+  username              = "minesweeperuser"
+  password              = "minesweeperpassword"
   parameter_group_name  = "default.postgres12"
   publicly_accessible   = false
 
