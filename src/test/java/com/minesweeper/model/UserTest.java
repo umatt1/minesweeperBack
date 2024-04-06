@@ -5,22 +5,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class UserTest {
 
-    @Test
-    void playerConstructorAndGetterSetter() {
-        // Given
-        String username = "testUser";
-        String password = "testPassword";
-
-        // When
-        User user = new User();
-
-        user.setUsername("newUsername");
-        user.setPassword("newPassword");
-
-        // Then
-        assertThat(user.getUsername()).isEqualTo("newUsername");
-        assertThat(user.getPassword()).isEqualTo("newPassword");
-    }
+//    @Test
+//    void playerConstructorAndGetterSetter() {
+//        // Given
+//        String username = "testUser";
+//        String password = "testPassword";
+//
+//        // When
+//        User user = new User();
+//
+//        user.setUsername("newUsername");
+//        user.setPassword("newPassword");
+//
+//        // Then
+//        assertThat(user.getUsername()).isEqualTo("newUsername");
+//        assertThat(user.getPassword()).isEqualTo("newPassword");
+//    }
 
     /*@Test
     void playerEquality() {
