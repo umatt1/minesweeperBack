@@ -1,7 +1,24 @@
 version: '3'
 
 services:
-  postgres:
+  app:
+    image: 'sweeper'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/minesweeperdb
+      - DB_USERNAME=minesweeperuser
+      - DB_PASSWORD=minesweeperpassword
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+
+
+  db:
     image: postgres
     restart: always
     container_name: minesweeper-postgres
