@@ -28,4 +28,4 @@ https://www.bezkoder.com/spring-boot-react-jwt-auth/
 https://www.youtube.com/watch?v=TeBt0Ike_Tk
 https://www.youtube.com/watch?v=GowFk_5Rx_I
 https://github.com/ruanbekker/aws-terraform-cicd-java-springboot
-
+https://github.com/timurgaleev/ecs-spring-boot-rds-tf/tree/master
