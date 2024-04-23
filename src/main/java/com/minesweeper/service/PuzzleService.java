@@ -62,6 +62,12 @@ public class PuzzleService {
         return flattenedLayout;
     }
     public Puzzle createPuzzleOfTheDay() {
+
+        // don't create another if one already exists
+        if (puzzleRepository.findByDate(LocalDate.now()).isPresent()) {
+            return puzzleRepository.findByDate(LocalDate.now()).get();
+        }
+
         List<Integer> layout = generateRandomLayout();
 
         // Create puzzle
