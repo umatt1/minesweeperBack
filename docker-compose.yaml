@@ -1,31 +1,31 @@
 version: '3'
 
 services:
-  app:
-    image: 'sweeper'
-    build:
-      context: .
-    container_name: app
-#    depends_on:
-#      - db
-    environment:
-      - DB_URL=jdbc:postgresql://minesweeperdb.cluster-cy2mdc8llhwk.us-east-1.rds.amazonaws.com:5432/postgres
-      - DB_USERNAME=minesweeperuser
-      - DB_PASSWORD=4tuLCkCx3Dw:]n*fi>hTb-??lC0*
-    expose:
-      - 8080
-      - 5432
-    ports:
-      - 8080:8080
+#  app:
+#    image: 'sweeper'
+#    build:
+#      context: .
+#    container_name: app
+##    depends_on:
+##      - db
+#    environment:
+#      - DB_URL=jdbc:postgresql://minesweeperdb.cluster-cy2mdc8llhwk.us-east-1.rds.amazonaws.com:5432/postgres
+#      - DB_USERNAME=minesweeperuser
+#      - DB_PASSWORD=4tuLCkCx3Dw:]n*fi>hTb-??lC0*
+#    expose:
+#      - 8080
+#      - 5432
+#    ports:
+#      - 8080:8080
 
 
-  # db:
-  #   image: postgres
-  #   restart: always
-  #   container_name: minesweeper-postgres
-  #   environment:
-  #     POSTGRES_DB: minesweeperdb
-  #     POSTGRES_USER: minesweeperuser
-  #     POSTGRES_PASSWORD: minesweeperpassword
-  #   ports:
-  #     - "5432:5432"
+   db:
+     image: postgres
+     restart: always
+     container_name: minesweeper-postgres
+     environment:
+       POSTGRES_DB: postgres
+       POSTGRES_USER: minesweeperuser
+       POSTGRES_PASSWORD: minesweeperpassword
+     ports:
+       - "5432:5432"
