@@ -1,7 +1,11 @@
 package com.minesweeper.service;
 
+import com.minesweeper.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import com.minesweeper.repo.SolveRepository;
@@ -12,9 +16,12 @@ public class SolveService {
 
     private final SolveRepository solveRepository;
 
+    private final UserService userService;
+
     @Autowired
-    public SolveService(SolveRepository solveRepository) {
+    public SolveService(SolveRepository solveRepository, UserService userService) {
         this.solveRepository = solveRepository;
+        this.userService = userService;
     }
 
     public List<Solve> getAllSolves() {
@@ -29,8 +36,12 @@ public class SolveService {
         return solveRepository.save(solve);
     }
 
-    public void deleteSolve(Long solveId) {
-        solveRepository.deleteById(solveId);
+    public List<Solve> getSolvesForWeek(String user) {
+        LocalDate startOfWeek = LocalDate.now();
+        while(!startOfWeek.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+            startOfWeek = startOfWeek.minusDays(1);
+        }
+        return solveRepository.getSolvesForWeek(user, startOfWeek);
     }
 
 }

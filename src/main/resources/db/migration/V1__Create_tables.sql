@@ -25,6 +25,7 @@ CREATE TABLE solve (
     username VARCHAR(255) REFERENCES users(username),
     pid INTEGER REFERENCES puzzle(id),
     time TIME,
+    success BOOLEAN NOT NULL,
     PRIMARY KEY (username, pid)
 );
 

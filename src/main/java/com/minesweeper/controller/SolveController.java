@@ -22,20 +22,19 @@ public class SolveController {
         return solveService.getAllSolves();
     }
 
-    @GetMapping("/{solveId}")
-    public Optional<Solve> getSolveById(@PathVariable Long solveId) {
-        return solveService.getSolveById(solveId);
-    }
-
     @PostMapping
     public Solve createSolve(@RequestBody Solve solve) {
         return solveService.createSolve(solve);
     }
 
-    @DeleteMapping("/{solveId}")
-    public void deleteSolve(@PathVariable Long solveId) {
-        solveService.deleteSolve(solveId);
+    @GetMapping("/{solveId}")
+    public Optional<Solve> getSolveById(@PathVariable Long solveId) {
+        return solveService.getSolveById(solveId);
     }
 
-    // You can add additional methods as needed
+    @GetMapping("/{user}")
+    public List<Solve> getSolvesForWeek(@PathVariable String user) {
+        return solveService.getSolvesForWeek(user);
+    }
+
 }
