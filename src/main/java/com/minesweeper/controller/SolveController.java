@@ -1,6 +1,7 @@
 package com.minesweeper.controller;
 
 import com.minesweeper.model.Solve;
+import com.minesweeper.model.SolveDTO;
 import com.minesweeper.service.SolveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class SolveController {
     }
 
     @PostMapping
-    public Solve createSolve(@RequestBody Solve solve) {
+    public Solve createSolve(@RequestBody SolveDTO solve) {
         return solveService.createSolve(solve);
     }
 
