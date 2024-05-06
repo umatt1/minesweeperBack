@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-
 @RequestMapping("/solve")
 public class SolveController {
 
@@ -28,7 +27,7 @@ public class SolveController {
         return solveService.createSolve(solve);
     }
 
-    @GetMapping("/{solveId}")
+    @GetMapping("/id/{solveId}")
     public Optional<Solve> getSolveById(@PathVariable Long solveId) {
         return solveService.getSolveById(solveId);
     }
