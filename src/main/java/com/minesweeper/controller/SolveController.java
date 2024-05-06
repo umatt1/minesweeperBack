@@ -1,6 +1,7 @@
 package com.minesweeper.controller;
 
 import com.minesweeper.model.Solve;
+import com.minesweeper.model.SolveDTO;
 import com.minesweeper.service.SolveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-
 @RequestMapping("/solve")
 public class SolveController {
 
@@ -22,20 +22,19 @@ public class SolveController {
         return solveService.getAllSolves();
     }
 
-    @GetMapping("/{solveId}")
+    @PostMapping
+    public Solve createSolve(@RequestBody SolveDTO solve) {
+        return solveService.createSolve(solve);
+    }
+
+    @GetMapping("/id/{solveId}")
     public Optional<Solve> getSolveById(@PathVariable Long solveId) {
         return solveService.getSolveById(solveId);
     }
 
-    @PostMapping
-    public Solve createSolve(@RequestBody Solve solve) {
-        return solveService.createSolve(solve);
+    @GetMapping("/{user}")
+    public List<Solve> getSolvesForWeek(@PathVariable String user) {
+        return solveService.getSolvesForWeek(user);
     }
 
-    @DeleteMapping("/{solveId}")
-    public void deleteSolve(@PathVariable Long solveId) {
-        solveService.deleteSolve(solveId);
-    }
-
-    // You can add additional methods as needed
 }
