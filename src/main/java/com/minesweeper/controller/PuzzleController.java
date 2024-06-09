@@ -34,17 +34,17 @@ public class PuzzleController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping
-    public ResponseEntity<Puzzle> createPuzzle(@RequestBody Puzzle puzzle) {
-        Puzzle createdPuzzle = puzzleService.createPuzzle(puzzle);
-        return new ResponseEntity<>(createdPuzzle, HttpStatus.CREATED);
-    }
+//    @PostMapping
+//    public ResponseEntity<Puzzle> createPuzzle(@RequestBody Puzzle puzzle) {
+//        Puzzle createdPuzzle = puzzleService.createPuzzle(puzzle);
+//        return new ResponseEntity<>(createdPuzzle, HttpStatus.CREATED);
+//    }
 
-    @DeleteMapping("/{puzzleId}")
-    public ResponseEntity<Void> deletePlayer(@PathVariable Long puzzleId) {
-        puzzleService.deletePuzzle(puzzleId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @DeleteMapping("/{puzzleId}")
+//    public ResponseEntity<Void> deletePlayer(@PathVariable Long puzzleId) {
+//        puzzleService.deletePuzzle(puzzleId);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 
     @PostMapping("/createPuzzleOfTheDay")
     public ResponseEntity<Puzzle> createPuzzleOfTheDay() {

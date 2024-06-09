@@ -101,7 +101,9 @@ public class SecurityConfig {
                         auth.requestMatchers("/auth/**").permitAll();
                         auth.requestMatchers("/admin/**").hasRole("ADMIN");
                         auth.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER");
-                        auth.requestMatchers("/puzzle/**").hasAnyRole("ADMIN", "USER");
+                        // TODO: Sort out the correct permissions here
+//                        auth.requestMatchers("/puzzle/**").hasAnyRole("ADMIN", "USER");
+                        auth.requestMatchers("/puzzle/**").permitAll();
                         auth.anyRequest().authenticated();
                 })
                 .oauth2ResourceServer((oauth2)->oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())))
