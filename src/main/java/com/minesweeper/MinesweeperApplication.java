@@ -32,10 +32,10 @@ public class MinesweeperApplication {
 			Role adminRole = roleRepository.save(new Role("ADMIN"));
 			roleRepository.save(new Role("USER"));
 
-			Set<Role> roles = new HashSet<>();
-			roles.add(adminRole);
-			User admin = new User(12345, "user", "password", roles);
-			userRepository.save(admin);
+//			Set<Role> roles = new HashSet<>();
+//			roles.add(adminRole);
+//			User admin = new User(12345, "user", "password", roles);
+//			userRepository.save(admin);
 		};
 	}
 
