@@ -1,4 +1,4 @@
-FROM openjdk:21
+FROM openjdk:23-slim-bookworm
 WORKDIR /opt
 ENV PORT 8080
 EXPOSE 8080
