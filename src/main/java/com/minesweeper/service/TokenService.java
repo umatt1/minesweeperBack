@@ -3,10 +3,7 @@ package com.minesweeper.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
+import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -20,6 +17,19 @@ public class TokenService {
 
     @Autowired
     private JwtDecoder jwtDecoder;
+
+    public boolean verifyJwtForUser(String jwtToken, String expectedUsername) {
+        try {
+            Jwt jwt = jwtDecoder.decode(jwtToken);
+            String username = jwt.getSubject();
+
+            // Check if the username matches the expected user
+            return username != null && username.equals(expectedUsername);
+        } catch (Exception e) {
+            // Handle token decoding or verification errors
+            return false;
+        }
+    }
 
     public String generateJwt(Authentication auth) {
 

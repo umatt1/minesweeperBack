@@ -5,6 +5,7 @@ public class SolveDTO {
     public String puzzleId;
     public String time;
     public Boolean success;
+    public String jwt;
 
     public Boolean getSuccess() {
         return success;
@@ -36,5 +37,13 @@ public class SolveDTO {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getJwt() {
+        return jwt;
+    }
+
+    public void setJwt(String jwt) {
+        this.jwt = jwt;
     }
 }
