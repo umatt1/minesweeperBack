@@ -54,9 +54,6 @@ public class SecurityConfig {
 
     private final RSAKeyProperties keys;
 
-    @Value("${frontend}")
-    private String allowedOrigin;
-
     public SecurityConfig(RSAKeyProperties keys) {
         this.keys = keys;
     }
