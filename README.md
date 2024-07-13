@@ -1,6 +1,7 @@
-This is going to be the backend 
+This is the backend for Sweeple
 
 It connects to a DB with schema of puzzles, users, and users' solves of the puzzles
+DB_PASSWORD=minesweeperpassword;DB_URL=jdbc:postgresql://localhost:5432/postgres;DB_USERNAME=minesweeperuser
 
 DB is postgres with Flyway migrations, runs in Dockerfile
 
@@ -13,12 +14,17 @@ Scripts to create, destroy postgresDB
 ./scripts/stopContainer to stop
 ./scripts/deleteContainer to delete
 
-TODO:
-More testing
-More user details
-Leaderboards?
-Index puzzles by date
-Set up solves table for how users will view their past history as well as an export
+Notes for testing
+
+http://localhost:8080/api/v1/actuator/health
+
+http://localhost:8080/api/v1/auth/login
+
+{
+"username": "123",
+"password": "."
+}
+
 
 
 [RESOURCES]

@@ -25,19 +25,19 @@ public class FriendRequestService {
     }
 
     // Request a friend
-    public FriendRequest requestFriend(User requester, User requested, String jwtToken) throws AuthenticationException {
+    public FriendRequest requestFriend(String requester, String requested, String jwtToken) throws AuthenticationException {
         // Verify the JWT token
-        if (!this.tokenService.verifyJwtForUser(jwtToken, requester.getUsername())) {
+        if (!this.tokenService.verifyJwtForUser(jwtToken, requester)) {
             throw new AuthenticationException("Invalid JWT");
         }
 
         // Check if a friendship already exists
-        if (this.friendRequestRepository.existsFriendship(requester.getUsername(), requested.getUsername())) {
+        if (this.friendRequestRepository.existsFriendship(requester, requested)) {
             throw new RuntimeException("Friend request not unique");
         }
 
         // Create and save the friend request
-        FriendRequest friendRequest = new FriendRequest(requester.getUsername(), requested.getUsername(), "pending");
+        FriendRequest friendRequest = new FriendRequest(requester, requested, "pending");
         return friendRequestRepository.save(friendRequest);
     }
 

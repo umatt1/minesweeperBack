@@ -2,6 +2,7 @@ package com.minesweeper.controller;
 
 import com.minesweeper.model.FriendRequest;
 import com.minesweeper.model.FriendRequestDTO;
+import com.minesweeper.model.FriendRequestResponseDTO;
 import com.minesweeper.model.User;
 import com.minesweeper.service.FriendRequestService;
 import com.minesweeper.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.naming.AuthenticationException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +29,12 @@ public class UserController {
     private FriendRequestService friendRequestService;
 
     @PostMapping("/request")
-    public ResponseEntity<FriendRequest> requestFriend(@RequestBody FriendRequestDTO friendRequest) {
-        return ResponseEntity.ok(new FriendRequest());
+    public ResponseEntity<FriendRequest> requestFriend(@RequestBody FriendRequestDTO friendRequest) throws AuthenticationException {
+        return ResponseEntity.ok(friendRequestService.requestFriend(friendRequest.getRequester(),friendRequest.getRequested(), friendRequest.getJwt()));
     }
 
     @PutMapping("/request/respond")
-    public ResponseEntity<FriendRequest> respondToRequest(@RequestBody FriendRequest friendRequest) {
+    public ResponseEntity<FriendRequestResponseDTO> respondToRequest(@RequestBody FriendRequestResponseDTO friendRequest) {
         return ResponseEntity.ok(friendRequest);
     }
 
@@ -41,36 +43,6 @@ public class UserController {
         return ResponseEntity.ok(new ArrayList<>());
     }
 
-
-
-//    @GetMapping
-//    public List<User> getAllUsers() {
-//        return userService.getAllUsers();
-//    }
-
-//    @GetMapping("/{userId}")
-//    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-//        Optional<User> user = userService.getPlayerById(userId);
-//        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
-
-//    @PostMapping
-//    public ResponseEntity<Object> createUser(@RequestBody User user) {
-//        try {
-//            User createdUser = userService.createPlayer(user);
-//            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//                    .buildAndExpand(createdUser.getEmail()).toUri();
-//            return ResponseEntity.created(location).build();
-//        } catch (RuntimeException e) {
-//            // Handle the exception, e.g., duplicate username or email
-//            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-//        }
-//    }
-
-//    @DeleteMapping("/{playerId}")
-//    public void deleteUser(@PathVariable Long userId) {
-//        userService.deletePlayer(userId);
-//    }
 
 
 }
