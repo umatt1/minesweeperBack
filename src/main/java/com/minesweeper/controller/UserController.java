@@ -1,9 +1,6 @@
 package com.minesweeper.controller;
 
-import com.minesweeper.model.FriendRequest;
-import com.minesweeper.model.FriendRequestDTO;
-import com.minesweeper.model.FriendRequestResponseDTO;
-import com.minesweeper.model.User;
+import com.minesweeper.model.*;
 import com.minesweeper.service.FriendRequestService;
 import com.minesweeper.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +35,8 @@ public class UserController {
         return ResponseEntity.ok(friendRequest);
     }
 
-    @GetMapping("/request")
-    public ResponseEntity<List<FriendRequest>> getRequests(@RequestBody String user) {
+    @GetMapping("/request/{username}")
+    public ResponseEntity<List<FriendRequest>> getRequests(@PathVariable String username) {
         return ResponseEntity.ok(new ArrayList<>());
     }
 
