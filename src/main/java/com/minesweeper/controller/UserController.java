@@ -26,8 +26,14 @@ public class UserController {
     private FriendRequestService friendRequestService;
 
     @PostMapping("/request")
-    public ResponseEntity<FriendRequest> requestFriend(@RequestBody FriendRequestDTO friendRequest) throws AuthenticationException {
-        return ResponseEntity.ok(friendRequestService.requestFriend(friendRequest.getRequester(),friendRequest.getRequested(), friendRequest.getJwt()));
+    public ResponseEntity<FriendRequest> requestFriend(@RequestBody FriendRequestDTO friendRequest, @RequestHeader("Authorization") String authorizationHeader) throws AuthenticationException {
+        String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : null;
+
+        if (token == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        return ResponseEntity.ok(friendRequestService.requestFriend(friendRequest.getRequester(),friendRequest.getRequested(), token));
     }
 
     @PutMapping("/request/respond")
@@ -36,29 +42,15 @@ public class UserController {
     }
 
     @GetMapping("/request/{username}")
-    public ResponseEntity<List<FriendRequest>> getRequests(@PathVariable String username, @RequestHeader("Authorization") String authorizationheader) {
-        return ResponseEntity.ok(new ArrayList<>());
-    }
-
-    /*
-        @GetMapping("/request")
-    public ResponseEntity<List<FriendRequest>> getRequests(
-            @RequestBody UserReadDTO user,
-            @RequestHeader("Authorization") String authorizationHeader) {
-
-        // Extract the token from the Authorization header (format: "Bearer <token>")
+    public ResponseEntity<List<FriendRequest>> getRequests(@PathVariable String username, @RequestHeader("Authorization") String authorizationHeader) throws AuthenticationException {
         String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : null;
 
         if (token == null) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); // Return 401 if token is missing or invalid
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
-        // Call the service to get friend requests for the user, passing the token
-        List<FriendRequest> friendRequests = friendRequestService.getFriendRequests(user.getUsername(), token);
-
-        return ResponseEntity.ok(friendRequests);
+        return ResponseEntity.ok(friendRequestService.getFriendRequestsReceivedByUser(username, token));
     }
-     */
 
 
 }

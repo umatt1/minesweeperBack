@@ -13,7 +13,7 @@ import java.util.List;
 public interface FriendRequestRepository extends JpaRepository<FriendRequest, FriendRequestId> {
 
     // Check if a friendship already exists between two users
-    @Query("SELECT count(fr) > 0 FROM FriendRequest fr WHERE (fr.requester = :user1 AND fr.requested = :user2) OR (fr.requester = :user2 AND fr.requested = :user1)")
+    @Query("SELECT CASE WHEN COUNT(fr) > 0 THEN true ELSE false END FROM FriendRequest fr WHERE (fr.requester = :user1 AND fr.requested = :user2) OR (fr.requester = :user2 AND fr.requested = :user1)")
     Boolean existsFriendship(@Param("user1") String user1, @Param("user2") String user2);
 
     // Find all friend requests sent by a user
