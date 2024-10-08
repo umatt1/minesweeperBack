@@ -32,8 +32,7 @@ public class FriendRequestService {
         }
 
         // Check if a friendship already exists
-        if (!this.friendRequestRepository.findFriendRequestsBetweenUsers(requester, requested).isEmpty()) {
-            System.out.println(this.friendRequestRepository.findFriendRequestsBetweenUsers(requester, requested));
+        if (!this.friendRequestRepository.findPendingFriendRequestsBetweenUsers(requester, requested).isEmpty()) {
             throw new RuntimeException("Friend request not unique");
         }
 
@@ -88,8 +87,16 @@ public class FriendRequestService {
         if (!this.tokenService.verifyJwtForUser(jwtToken, requested)) {
             throw new AuthenticationException("Invalid JWT");
         }
-        System.out.println(friendRequestRepository.findByRequested(requested));
         return friendRequestRepository.findByRequested(requested);
+    }
+
+    // Get all Open friend requests received by a user
+    public List<FriendRequest> getOpenFriendRequestsReceivedByUser(String requested, String jwtToken) throws AuthenticationException {
+        // Verify the JWT token
+        if (!this.tokenService.verifyJwtForUser(jwtToken, requested)) {
+            throw new AuthenticationException("Invalid JWT");
+        }
+        return friendRequestRepository.findByOpenAndRequested(requested);
     }
 
     // Get all friend requests between two users

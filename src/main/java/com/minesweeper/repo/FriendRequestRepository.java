@@ -22,6 +22,13 @@ public interface FriendRequestRepository extends JpaRepository<FriendRequest, Fr
     // Find all friend requests received by a user
     List<FriendRequest> findByRequested(String requested);
 
+    @Query("SELECT fr FROM FriendRequest fr WHERE (fr.requested = :requested AND fr.status = 'pending')")
+    List<FriendRequest> findByOpenAndRequested(@Param("requested") String requested);
+
+    @Query("SELECT fr FROM FriendRequest fr WHERE ((fr.requester = :user1 AND fr.requested = :user2) OR (fr.requester = :user2 AND fr.requested = :user1)) AND fr.status = 'pending'")
+
+    List<FriendRequest> findPendingFriendRequestsBetweenUsers(@Param("user1") String user1, @Param("user2") String user2);
+
     // Find all friend requests by status
     List<FriendRequest> findByStatus(String status);
 

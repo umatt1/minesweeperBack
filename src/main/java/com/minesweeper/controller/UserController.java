@@ -36,9 +36,28 @@ public class UserController {
         return ResponseEntity.ok(friendRequestService.requestFriend(friendRequest.getRequester(),friendRequest.getRequested(), token));
     }
 
-    @PutMapping("/request/respond")
-    public ResponseEntity<FriendRequestResponseDTO> respondToRequest(@RequestBody FriendRequestResponseDTO friendRequest) {
-        return ResponseEntity.ok(friendRequest);
+    @PutMapping("/request/respond/accept")
+    public ResponseEntity<FriendRequest> acceptRequest(@RequestBody FriendRequestResponseDTO friendRequest, @RequestHeader("Authorization") String authorizationHeader) throws AuthenticationException {
+        String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : null;
+
+        if (token == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        return ResponseEntity.ok(friendRequestService.acceptFriendRequest(friendRequest.getRequester(), friendRequest.getRequested(), token));
+    }
+
+    @PutMapping("/request/respond/decline")
+    public ResponseEntity<String> declineRequest(@RequestBody FriendRequestResponseDTO friendRequest, @RequestHeader("Authorization") String authorizationHeader) throws AuthenticationException {
+        String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : null;
+
+        if (token == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        friendRequestService.rejectFriendRequest(friendRequest.getRequester(), friendRequest.getRequested(), token);
+
+        return ResponseEntity.ok("Declined");
     }
 
     @GetMapping("/request/{username}")
@@ -49,7 +68,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
-        return ResponseEntity.ok(friendRequestService.getFriendRequestsReceivedByUser(username, token));
+        return ResponseEntity.ok(friendRequestService.getOpenFriendRequestsReceivedByUser(username, token));
     }
 
 

@@ -13,7 +13,6 @@ public class ScheduledTasks {
 
     @Scheduled(cron = "0 0 0 * * ?") // Run at midnight every night
     public void createPuzzle() {
-        System.out.println("Creating puzzle of the day");
         puzzleController.createPuzzleOfTheDay();
     }
 }
