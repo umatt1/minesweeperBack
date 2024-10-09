@@ -134,4 +134,8 @@ public class FriendRequestService {
         List<FriendRequest> friendRequests = friendRequestRepository.findFriendRequestsBetweenUsers(user1, user2);
         return friendRequests.stream().anyMatch(fr -> "accepted".equals(fr.getStatus()));
     }
+
+    public List<String> getFriends(String username) {
+        return friendRequestRepository.findFriends(username);
+    }
 }

@@ -25,7 +25,13 @@ public class UserController {
     @Autowired
     private FriendRequestService friendRequestService;
 
-    @PostMapping("/request")
+    @GetMapping("/friends/${username}")
+    public ResponseEntity<List<String>> getFriends(@PathVariable String username) throws AuthenticationException {
+        return ResponseEntity.ok(friendRequestService.getFriends(username));
+
+    }
+
+        @PostMapping("/request")
     public ResponseEntity<FriendRequest> requestFriend(@RequestBody FriendRequestDTO friendRequest, @RequestHeader("Authorization") String authorizationHeader) throws AuthenticationException {
         String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : null;
 
