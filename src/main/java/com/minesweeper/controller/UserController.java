@@ -7,13 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.naming.AuthenticationException;
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
@@ -25,13 +21,12 @@ public class UserController {
     @Autowired
     private FriendRequestService friendRequestService;
 
-    @GetMapping("/friends/${username}")
-    public ResponseEntity<List<String>> getFriends(@PathVariable String username) throws AuthenticationException {
+    @GetMapping("/friends/{username}")
+    public ResponseEntity<List<String>> getFriends(@PathVariable String username) {
         return ResponseEntity.ok(friendRequestService.getFriends(username));
-
     }
 
-        @PostMapping("/request")
+    @PostMapping("/request")
     public ResponseEntity<FriendRequest> requestFriend(@RequestBody FriendRequestDTO friendRequest, @RequestHeader("Authorization") String authorizationHeader) throws AuthenticationException {
         String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : null;
 
