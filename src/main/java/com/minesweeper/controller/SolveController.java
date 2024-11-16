@@ -53,20 +53,11 @@ public class SolveController {
     public List<Solve> getSolvesForWeek(@PathVariable String user) {
         return solveService.getSolvesForWeek(user);
     }
-    @GetMapping("/dailySolvesForFriends/{username}")
-    public List<Solve> getDailySolvesForFriends(@PathVariable String username) {
+    @GetMapping("/{username}/{puzzleId}")
+    public List<Solve> getDailySolvesForFriends(@PathVariable String username, @PathVariable Long puzzleId) {
         // Get the friends of the user
         List<String> friends = friendRequestService.getFriends(username);
 
-        // Get the puzzle of the day
-        Optional<Puzzle> puzzleOfDay = puzzleService.getPuzzleByDate(LocalDate.now());
-
-        if (puzzleOfDay.isPresent()) {
-            // Get the solves for the friends
-            return solveService.getSolvesForFriends(friends, (long) puzzleOfDay.get().getId());
-        } else {
-            // Return an empty list if no puzzle of the day is found
-            return new ArrayList<>();
-        }
+        return solveService.getSolvesForFriends(friends, puzzleId);
     }
 }
