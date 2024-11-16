@@ -67,4 +67,9 @@ public class SolveService {
         return solveRepository.getSolvesForWeek(user, startOfWeek);
     }
 
+    // In SolveService.java
+    public List<Solve> getSolvesForFriends(List<String> friends, Long puzzleId) {
+        return solveRepository.findByPuzzleIdAndUserUsernameIn(puzzleId, friends);
+    }
+
 }

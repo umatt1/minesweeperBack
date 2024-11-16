@@ -7,6 +7,7 @@ import com.minesweeper.repo.FriendRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.naming.AuthenticationException;
 import java.util.List;
@@ -137,5 +138,21 @@ public class FriendRequestService {
 
     public List<String> getFriends(String username) {
         return friendRequestRepository.findFriends(username);
+    }
+
+    @Transactional
+    public void removeFriend(Long userId, Long friendId, String token) throws AuthenticationException {
+        // Verify the JWT token
+        if (!this.tokenService.verifyJwtForUser(token, userId.toString()) && !this.tokenService.verifyJwtForUser(token, friendId.toString())) {
+            throw new AuthenticationException("Invalid JWT");
+        }
+
+        // Check if the users are friends
+        if (!checkAcceptedFriendByUsername(userId.toString(), friendId.toString(), token)) {
+            throw new AuthenticationException("Users are not friends");
+        }
+
+        // Remove the friend request
+        friendRequestRepository.deleteByRequesterAndRequested(userId.toString(), friendId.toString());
     }
 }

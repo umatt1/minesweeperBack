@@ -72,5 +72,17 @@ public class UserController {
         return ResponseEntity.ok(friendRequestService.getOpenFriendRequestsReceivedByUser(username, token));
     }
 
+    @DeleteMapping("/friends/{userId}/{friendId}")
+    public ResponseEntity<String> removeFriend(@PathVariable Long userId, @PathVariable Long friendId, @RequestHeader("Authorization") String authorizationHeader) throws AuthenticationException {
+        String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : null;
+
+        if (token == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        friendRequestService.removeFriend(userId, friendId, token);
+
+        return ResponseEntity.ok("Friend removed");
+    }
 
 }

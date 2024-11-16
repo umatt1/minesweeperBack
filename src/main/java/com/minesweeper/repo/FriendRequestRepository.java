@@ -3,6 +3,7 @@ package com.minesweeper.repo;
 import com.minesweeper.model.FriendRequest;
 import com.minesweeper.model.FriendRequestId;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -40,4 +41,9 @@ public interface FriendRequestRepository extends JpaRepository<FriendRequest, Fr
     // Find all friend requests between two users
     @Query("SELECT fr FROM FriendRequest fr WHERE (fr.requester = :user1 AND fr.requested = :user2) OR (fr.requester = :user2 AND fr.requested = :user1)")
     List<FriendRequest> findFriendRequestsBetweenUsers(@Param("user1") String user1, @Param("user2") String user2);
+
+    @Modifying
+    @Query("DELETE FROM FriendRequest fr WHERE fr.requester = :requester AND fr.requested = :requested")
+    void deleteByRequesterAndRequested(@Param("requester") String requester, @Param("requested") String requested);
+
 }
