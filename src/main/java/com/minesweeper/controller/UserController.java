@@ -73,7 +73,7 @@ public class UserController {
     }
 
     @DeleteMapping("/friends/{userId}/{friendId}")
-    public ResponseEntity<String> removeFriend(@PathVariable Long userId, @PathVariable Long friendId, @RequestHeader("Authorization") String authorizationHeader) throws AuthenticationException {
+    public ResponseEntity<String> removeFriend(@PathVariable String userId, @PathVariable String friendId, @RequestHeader("Authorization") String authorizationHeader) throws AuthenticationException {
         String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : null;
 
         if (token == null) {

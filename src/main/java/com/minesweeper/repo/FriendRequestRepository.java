@@ -42,7 +42,7 @@ public interface FriendRequestRepository extends JpaRepository<FriendRequest, Fr
     List<FriendRequest> findFriendRequestsBetweenUsers(@Param("user1") String user1, @Param("user2") String user2);
 
     @Modifying
-    @Query("DELETE FROM FriendRequest fr WHERE fr.requester = :requester AND fr.requested = :requested")
-    void deleteByRequesterAndRequested(@Param("requester") String requester, @Param("requested") String requested);
+    @Query("DELETE FROM FriendRequest fr WHERE (fr.requester = :requester AND fr.requested = :requested) OR (fr.requester = :requested AND fr.requested = :requester)")
+    void deleteFriendRequest(@Param("requester") String requester, @Param("requested") String requested);
 
 }

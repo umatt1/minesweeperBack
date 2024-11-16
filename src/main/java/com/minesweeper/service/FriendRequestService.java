@@ -141,18 +141,18 @@ public class FriendRequestService {
     }
 
     @Transactional
-    public void removeFriend(Long userId, Long friendId, String token) throws AuthenticationException {
+    public void removeFriend(String userId, String friendId, String token) throws AuthenticationException {
         // Verify the JWT token
-        if (!this.tokenService.verifyJwtForUser(token, userId.toString()) && !this.tokenService.verifyJwtForUser(token, friendId.toString())) {
+        if (!this.tokenService.verifyJwtForUser(token, userId)) {
             throw new AuthenticationException("Invalid JWT");
         }
 
-        // Check if the users are friends
-        if (!checkAcceptedFriendByUsername(userId.toString(), friendId.toString(), token)) {
-            throw new AuthenticationException("Users are not friends");
-        }
+//        // Check if the users are friends
+//        if (!checkAcceptedFriendByUsername(userId.toString(), friendId.toString(), token)) {
+//            throw new AuthenticationException("Users are not friends");
+//        }
 
         // Remove the friend request
-        friendRequestRepository.deleteByRequesterAndRequested(userId.toString(), friendId.toString());
+        friendRequestRepository.deleteFriendRequest(userId, friendId);
     }
 }
