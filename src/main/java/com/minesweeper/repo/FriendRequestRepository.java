@@ -15,8 +15,7 @@ public interface FriendRequestRepository extends JpaRepository<FriendRequest, Fr
 
     // Check if a friendship already exists between two users
 
-    @Query("SELECT CASE WHEN fr.requester = :user THEN fr.requested ELSE fr.requester END " +
-            "FROM FriendRequest fr WHERE (fr.requester = :user OR fr.requested = :user) AND fr.status = 'accepted'")
+    @Query("(SELECT fr.requester FROM FriendRequest fr WHERE (fr.requested = :user AND fr.status = 'accepted') UNION (SELECT fr.requested FROM FriendRequest fr WHERE (fr.requester = :user AND fr.status = 'accepted')))")
     List<String> findFriends(@Param("user") String user);
 
     @Query("SELECT CASE WHEN COUNT(fr) > 0 THEN true ELSE false END FROM FriendRequest fr WHERE (fr.requester = :user1 AND fr.requested = :user2) OR (fr.requester = :user2 AND fr.requested = :user1)")
