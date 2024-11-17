@@ -1,5 +1,6 @@
 package com.minesweeper.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.sql.Time;
@@ -11,6 +12,7 @@ public class Solve {
     @Id
     @ManyToOne
     @JoinColumn(name = "username", referencedColumnName = "username")
+    @JsonIgnoreProperties({"password", "authorities"})
     private User user;
 
     @Id

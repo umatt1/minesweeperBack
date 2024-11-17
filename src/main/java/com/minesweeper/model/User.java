@@ -1,5 +1,6 @@
 package com.minesweeper.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +21,7 @@ public class User implements UserDetails {
     @Column(unique=true)
     private String username;
 
+    @JsonIgnore
     private String password;
 
     @ManyToMany(fetch=FetchType.EAGER)
@@ -28,6 +30,7 @@ public class User implements UserDetails {
             joinColumns = {@JoinColumn(name="user_id")},
             inverseJoinColumns = {@JoinColumn(name="role_id")}
     )
+    @JsonIgnore
     private Set<Role> authorities;
 
     public User() {
