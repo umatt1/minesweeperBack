@@ -82,7 +82,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        ArrayList<String> origins = new ArrayList<>(List.of("https://localhost:5173", "https://localhost:8080", "https://localhost:80"));
+        ArrayList<String> origins = new ArrayList<>(List.of("http://localhost:5173", "http://localhost:8080", "http://localhost:80"));
         if (environment.containsProperty("CLIENT_ORIGIN")){
             origins.add(environment.getProperty("CLIENT_ORIGIN"));
             origins.add(environment.getProperty("CLIENT_ORIGIN")+"/*");
