@@ -38,19 +38,42 @@ public class PuzzleService {
     private List<Integer> generateRandomLayout() {
         List<Integer> flattenedLayout = new ArrayList<>();
         Random random = new Random();
-        int numMines = 10;
+        
+        // Get current day of week (1 = Monday, 7 = Sunday)
+        int dayOfWeek = LocalDate.now().getDayOfWeek().getValue();
+        // Convert to 0 = Sunday, 6 = Saturday for easier understanding
+        dayOfWeek = (dayOfWeek % 7);
+        
+        // Base size starts small and increases slightly through the week
+        // Sunday: 6x6, Monday: 7x7, ..., Saturday: 9x9
+        int size = 6 + (dayOfWeek);
+        int totalCells = size * size;
+        
+        // Number of mines increases with difficulty
+        // Sunday: 5 mines (13.8%), Monday: 7 mines (14.3%), ..., Saturday: 15 mines (18.5%)
+        int numMines = switch(dayOfWeek) {
+            case 0 -> 5;  // Sunday
+            case 1 -> 7;  // Monday
+            case 2 -> 8;  // Tuesday
+            case 3 -> 10; // Wednesday
+            case 4 -> 12; // Thursday
+            case 5 -> 13; // Friday
+            case 6 -> 15; // Saturday
+            default -> 10;
+        };
+        
         Set<Integer> mines = new HashSet<>();
 
         // choose mines
         for (int i = 0; i < numMines; i++) {
-            int indexToSwap = random.nextInt(100);
+            int indexToSwap = random.nextInt(totalCells);
             while(mines.contains(indexToSwap)) {
-                indexToSwap = random.nextInt(100);
+                indexToSwap = random.nextInt(totalCells);
             }
             mines.add(indexToSwap);
         }
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < totalCells; i++) {
             if (mines.contains(i)) {
                 flattenedLayout.add(1);
             } else {
@@ -58,9 +81,9 @@ public class PuzzleService {
             }
         }
 
-
         return flattenedLayout;
     }
+    
     public Puzzle createPuzzleOfTheDay() {
 
         // don't create another if one already exists
@@ -68,10 +91,18 @@ public class PuzzleService {
             return puzzleRepository.findByDate(LocalDate.now()).get();
         }
 
+        // Get current day of week (1 = Monday, 7 = Sunday)
+        int dayOfWeek = LocalDate.now().getDayOfWeek().getValue();
+        // Convert to 0 = Sunday, 6 = Saturday for easier understanding
+        dayOfWeek = (dayOfWeek % 7);
+        
+        // Base size starts small and increases slightly through the week
+        int size = 6 + (dayOfWeek);
+        
         List<Integer> layout = generateRandomLayout();
 
-        // Create puzzle
-        Puzzle puzzle = new Puzzle(LocalDate.now(), layout, 10L, 10L);
+        // Create puzzle with dynamic size
+        Puzzle puzzle = new Puzzle(LocalDate.now(), layout, (long)size, (long)size);
 
         // Save the puzzle to the database
         return puzzleRepository.save(puzzle);
