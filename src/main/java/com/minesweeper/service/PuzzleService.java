@@ -101,8 +101,20 @@ public class PuzzleService {
         
         List<Integer> layout = generateRandomLayout();
 
-        // Create puzzle with dynamic size
-        Puzzle puzzle = new Puzzle(LocalDate.now(), layout, (long)size, (long)size);
+        // Calculate number of mines based on day of week
+        int mines = switch(dayOfWeek) {
+            case 0 -> 5;  // Sunday
+            case 1 -> 7;  // Monday
+            case 2 -> 8;  // Tuesday
+            case 3 -> 10; // Wednesday
+            case 4 -> 12; // Thursday
+            case 5 -> 13; // Friday
+            case 6 -> 15; // Saturday
+            default -> 10;
+        };
+
+        // Create puzzle with dynamic size and mines
+        Puzzle puzzle = new Puzzle(LocalDate.now(), layout, (long)size, (long)size, mines);
 
         // Save the puzzle to the database
         return puzzleRepository.save(puzzle);

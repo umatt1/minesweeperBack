@@ -25,6 +25,9 @@ public class Puzzle {
     private Long width;
 
     @Column(nullable = false)
+    private Integer mines;
+
+    @Column(nullable = false)
     public List<Integer> getLayout() {
         return layout;
     }
@@ -36,6 +39,10 @@ public class Puzzle {
     @Column(nullable = true)
     public LocalDate getDate() {
         return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     @Column(nullable = false)
@@ -61,16 +68,25 @@ public class Puzzle {
         this.layout = layout;
     }
 
+    @Column(nullable = false)
+    public Integer getMines() {
+        return mines;
+    }
+
+    public void setMines(Integer mines) {
+        this.mines = mines;
+    }
 
     // Constructors, getters, setters, and other methods
 
     public Puzzle() {
     }
 
-    public Puzzle(LocalDate date, List<Integer> layout, Long height, Long width) {
+    public Puzzle(LocalDate date, List<Integer> layout, Long height, Long width, Integer mines) {
         this.date = date;
         this.layout = layout;
         this.height = height;
         this.width = width;
+        this.mines = mines;
     }
 }

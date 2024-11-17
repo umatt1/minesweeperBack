@@ -17,7 +17,8 @@ CREATE TABLE puzzle (
     date DATE UNIQUE,
     layout INTEGER ARRAY NOT NULL,
     height BIGINT NOT NULL,
-    width BIGINT NOT NULL
+    width BIGINT NOT NULL,
+    mines INTEGER NOT NULL
 );
 
 -- Solve Table
