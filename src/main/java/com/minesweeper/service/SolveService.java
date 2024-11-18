@@ -72,4 +72,7 @@ public class SolveService {
         return solveRepository.findByPuzzleIdAndUserUsernameIn(puzzleId, friends);
     }
 
+    public long getTotalSolves() {
+        return solveRepository.count();
+    }
 }

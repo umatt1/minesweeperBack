@@ -33,4 +33,7 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    public long getTotalUsers() {
+        return userRepository.count();
+    }
 }
