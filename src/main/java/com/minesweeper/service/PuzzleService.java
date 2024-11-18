@@ -81,6 +81,16 @@ public class PuzzleService {
             }
         }
 
+        // Select a random non-mine square as the guaranteed start spot
+        List<Integer> nonMineSquares = new ArrayList<>();
+        for (int i = 0; i < totalCells; i++) {
+            if (!mines.contains(i)) {
+                nonMineSquares.add(i);
+            }
+        }
+        int guaranteedStartSpot = nonMineSquares.get(random.nextInt(nonMineSquares.size()));
+        flattenedLayout.set(guaranteedStartSpot, 2);
+
         return flattenedLayout;
     }
     
