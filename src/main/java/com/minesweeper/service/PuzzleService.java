@@ -35,6 +35,30 @@ public class PuzzleService {
         puzzleRepository.deleteById(puzzleId);
     }
 
+    private int countSurroundingMines(int position, Set<Integer> mines, int size) {
+        int row = position / size;
+        int col = position % size;
+        int count = 0;
+        
+        // Check all 8 surrounding positions
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i == 0 && j == 0) continue;
+                
+                int newRow = row + i;
+                int newCol = col + j;
+                
+                if (newRow >= 0 && newRow < size && newCol >= 0 && newCol < size) {
+                    int checkPos = newRow * size + newCol;
+                    if (mines.contains(checkPos)) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
     private List<Integer> generateRandomLayout() {
         List<Integer> flattenedLayout = new ArrayList<>();
         Random random = new Random();
@@ -81,14 +105,23 @@ public class PuzzleService {
             }
         }
 
-        // Select a random non-mine square as the guaranteed start spot
-        List<Integer> nonMineSquares = new ArrayList<>();
+        // Group non-mine squares by number of surrounding mines
+        Map<Integer, List<Integer>> squaresByMineCount = new HashMap<>();
         for (int i = 0; i < totalCells; i++) {
             if (!mines.contains(i)) {
-                nonMineSquares.add(i);
+                int surroundingMines = countSurroundingMines(i, mines, size);
+                squaresByMineCount.computeIfAbsent(surroundingMines, k -> new ArrayList<>()).add(i);
             }
         }
-        int guaranteedStartSpot = nonMineSquares.get(random.nextInt(nonMineSquares.size()));
+
+        // Find the minimum number of surrounding mines available
+        int minMines = squaresByMineCount.keySet().stream()
+            .min(Integer::compareTo)
+            .orElse(0);
+
+        // Select a random square from those with the minimum number of surrounding mines
+        List<Integer> bestSquares = squaresByMineCount.get(minMines);
+        int guaranteedStartSpot = bestSquares.get(random.nextInt(bestSquares.size()));
         flattenedLayout.set(guaranteedStartSpot, 2);
 
         return flattenedLayout;
